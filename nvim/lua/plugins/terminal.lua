@@ -30,6 +30,12 @@ return {
 				hidden = true,
 			})
 
+			local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+
+			function _lazygit_toggle()
+				lazygit:toggle()
+			end
+
 			map({ "n", "t" }, "<c-t>", function()
 				if vim.fn.mode() == "t" then
 					esc_terminal()
@@ -37,6 +43,13 @@ return {
 				float_term:toggle()
 				vim.cmd("startinsert")
 			end, "Toggle floating terminal")
+
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>g",
+				"<cmd>lua _lazygit_toggle()<CR>",
+				{ noremap = true, silent = true }
+			)
 		end,
 	},
 }

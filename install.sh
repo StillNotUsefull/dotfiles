@@ -41,6 +41,13 @@ else
   echo "==> stow already installed"
 fi
 
+# Install lazygit if missing
+if ! command -v lazygit >/dev/null 2>&1; then
+  brew install lazygit
+else
+  echo "==> stow already installed"
+fi
+
 # Install Neovim if missing
 if ! command -v nvim >/dev/null 2>&1; then
   brew install neovim
