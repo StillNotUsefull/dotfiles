@@ -15,6 +15,7 @@ return {
 				"query",
 				"vim",
 				"vimdoc",
+				"astro",
 			},
 			auto_install = true,
 			highlight = {
@@ -23,5 +24,18 @@ return {
 			},
 			indent = { enable = true, disable = { "ruby" } },
 		},
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		event = "BufReadPre",
+		config = function()
+			require("nvim-ts-autotag").setup({
+				opts = {
+					enable_close = true, -- Auto close tags
+					enable_rename = true, -- Auto rename pairs of tags
+					enable_close_on_slash = false, -- Auto close on trailing </
+				},
+			})
+		end,
 	},
 }
