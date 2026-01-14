@@ -3,8 +3,16 @@ general.import = [
 ]
 
 [font]
-size = 15.0
+size = 16.0
 normal.family = "JetBrainsMono Nerd Font"
 bold.family = "JetBrainsMono Nerd Font"
 italic.family = "JetBrainsMono Nerd Font"
 bold_italic.family = "JetBrainsMono Nerd Font"
+
+[window]
+padding.y = 12
+
+# remap numpad substract
+[[keyboard.bindings]]
+key = 74
+chars = "-"
