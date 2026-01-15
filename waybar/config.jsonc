@@ -1,0 +1,48 @@
+{
+    "layer": "top",
+    "modules-left": [
+        "clock"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "temperature"
+    ],
+    "clock": {
+        "interval": 60,
+        "format": "{:%H:%M}",
+        "max-length": 25
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": "",
+            "empty": ""
+        },
+        "persistent-workspaces": {
+            "*": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ]
+        }
+    },
+    "cpu": {
+        "format": "󰻠 {usage}%"
+    },
+    "memory": {
+        "format": "  {used} Gib"
+    },
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format": " {temperatureC}°C"
+    }
+}
