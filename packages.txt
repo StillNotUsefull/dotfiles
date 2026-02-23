@@ -6,3 +6,5 @@ sddm
 hyprpolkitagent
 yazi
 lazygit
+zen-browser
+git
