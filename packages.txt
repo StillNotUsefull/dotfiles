@@ -1,0 +1,8 @@
+hyprland
+alacritty
+nvim
+waybar
+sddm
+hyprpolkitagent
+yazi
+lazygit

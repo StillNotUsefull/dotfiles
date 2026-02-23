@@ -20,6 +20,9 @@ end)
 -- Enable break indent
 vim.o.breakindent = true
 
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+
 -- Save undo history
 vim.o.undofile = true
 
@@ -141,7 +144,6 @@ rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{ "NMAC427/guess-indent.nvim", opts = {} },
-	-- Adds git related signs to the gutter, as well as utilities for managing changes
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
@@ -242,6 +244,7 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
+			{ "mason-org/mason-lspconfig.nvim", opts = {} },
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 			{ "j-hui/fidget.nvim", opts = {} },
@@ -302,17 +305,17 @@ require("lazy").setup({
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				"lua-language-server", -- Lua Language server
-				"stylua", -- Used to format Lua code
-				"rust-analyzer",
-				"typescript-language-server",
+				"lua_ls",
+				"stylua",
+				"rust_analyzer",
+				"ts_ls",
 				"marksman",
 				"taplo",
-				"tailwindcss-language-server",
-				"dockerfile-language-server",
-				"html-lsp",
-				"json-lsp",
-				"astro-language-server",
+				"tailwindcss",
+				"dockerls",
+				"html",
+				"jsonls",
+				"astro",
 				"pyright",
 			})
 
@@ -344,8 +347,6 @@ require("lazy").setup({
 						},
 						workspace = {
 							checkThirdParty = false,
-							-- NOTE: this is a lot slower and will cause issues when working on your own configuration.
-							--  See https://github.com/neovim/nvim-lspconfig/issues/3189
 							library = vim.api.nvim_get_runtime_file("", true),
 						},
 					})
@@ -421,7 +422,7 @@ require("lazy").setup({
 		--- @type blink.cmp.Config
 		opts = {
 			keymap = {
-				preset = "super-tab",
+				preset = "enter",
 			},
 
 			appearance = {
@@ -429,7 +430,7 @@ require("lazy").setup({
 			},
 
 			completion = {
-				documentation = { auto_show = false, auto_show_delay_ms = 500 },
+				documentation = { auto_show = true, auto_show_delay_ms = 500 },
 			},
 
 			sources = {
@@ -503,6 +504,9 @@ require("lazy").setup({
 
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			{ "windwp/nvim-ts-autotag", opts = {} },
+		},
 		config = function()
 			local filetypes = {
 				"bash",
@@ -531,17 +535,6 @@ require("lazy").setup({
 				end,
 			})
 		end,
-	},
-	-- Autoclosing brackets
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-	},
-	{ -- Add indentation guides even on blank lines
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {},
 	},
 	-- Shortcuts for toggleing code comments
 	{
@@ -585,6 +578,12 @@ require("lazy").setup({
 				lazygit:toggle()
 			end
 
+			local yazi = Terminal:new({ cmd = "yazi", hidden = true })
+
+			function _yazi_toggle()
+				yazi:toggle()
+			end
+
 			map({ "n", "t" }, "<c-t>", function()
 				if vim.fn.mode() == "t" then
 					esc_terminal()
@@ -599,6 +598,8 @@ require("lazy").setup({
 				"<cmd>lua _lazygit_toggle()<CR>",
 				{ noremap = true, silent = true }
 			)
+
+			vim.api.nvim_set_keymap("n", "<leader>y", "<cmd>lua _yazi_toggle()<CR>", { noremap = true, silent = true })
 		end,
 	},
 	{
@@ -666,6 +667,18 @@ require("lazy").setup({
 			})
 		end,
 	},
+	{ -- Add indentation guides even on blank lines
+		"lukas-reineke/indent-blankline.nvim",
+		-- Enable `lukas-reineke/indent-blankline.nvim`
+		-- See `:help ibl`
+		main = "ibl",
+		opts = {},
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {},
+	},
 }, {
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {
@@ -683,5 +696,9 @@ require("lazy").setup({
 			task = "📌",
 			lazy = "💤 ",
 		},
+	},
+	checker = {
+		enabled = true,
+		notify = false,
 	},
 })
