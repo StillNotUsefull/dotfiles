@@ -38,4 +38,6 @@ make_link() {
 
 # ── Links ─────────────────────────────────────────────────────────────────────
 
+make_link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
 make_link "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
+make_link "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
