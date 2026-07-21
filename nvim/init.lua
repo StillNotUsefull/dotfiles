@@ -261,7 +261,7 @@ local servers = {
 }
 
 vim.pack.add {
-    { src = 'https://github.com/neovim/nvim-lspconfig' },
+    { src = 'https://github.com/neovim/nvim-lspconfig'},
     { src = 'https://github.com/mason-org/mason.nvim' },
     { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
     { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
@@ -472,13 +472,29 @@ vim.keymap.set(
 
 vim.keymap.set('n', '<leader>sn', function() builtin.find_files { cwd = vim.fn.stdpath 'config', follow = true } end, { desc = '[S]earch [N]eovim files' })
 
-
 -- ═══════════════════════════════════════════════════════════════
--- Indent Blank Lines
+-- Mini
 -- ═══════════════════════════════════════════════════════════════
 
-vim.pack.add { 'https://github.com/lukas-reineke/indent-blankline.nvim' }
-require('ibl').setup {}
+vim.pack.add { { src = 'https://github.com/nvim-mini/mini.nvim' } }
+
+if vim.g.have_nerd_font then
+  require('mini.icons').setup()
+  MiniIcons.mock_nvim_web_devicons()
+end
+
+require('mini.comment').setup()
+
+require('mini.splitjoin').setup()
+
+require('mini.indentscope').setup({
+    draw = {
+        animation = require('mini.indentscope').gen_animation.none()
+    },
+    symbol = '|'
+})
+
+require('mini.statusline').setup()
 
 -- ═══════════════════════════════════════════════════════════════
 -- Git
