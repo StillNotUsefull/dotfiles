@@ -6,14 +6,8 @@
 # Fallback value (if you omit the key): config-version = 1
 config-version = 2
 
-# You can use it to add commands that run after AeroSpace startup.
-# Available commands : https://nikitabobko.github.io/AeroSpace/commands
-# Starts JankyBorders alongside AeroSpace with Catppuccin Mocha colors
-# (active = Lavender #b4befe, inactive = Surface1 #45475a)
-after-startup-command = ['exec-and-forget borders active_color=0xffb4befe inactive_color=0xff45475a style=round width=6.0']
-
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Automatically reload the config when the config file is saved
 # After setting this to true, reload once manually to start the auto-reloading

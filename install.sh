@@ -82,6 +82,7 @@ BREW_CASKS=(
 
 for tap in "${BREW_TAPS[@]+"${BREW_TAPS[@]}"}"; do
   brew tap "$tap"
+  brew trust nikitabobko/tap
   log_ok "tapped: $tap"
 done
 
