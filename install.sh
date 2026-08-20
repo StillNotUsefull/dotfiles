@@ -51,18 +51,30 @@ else
   log_ok "Homebrew already installed"
 fi
 
+BREW_TAPS=(
+  nikitabobko/tap
+  FelixKratz/formulae
+)
+
 BREW_PACKAGES=(
   neovim
   tmux
   ripgrep
   node
   go
+  borders
 )
 
 BREW_CASKS=(
   ghostty
   font-jetbrains-mono-nerd-font
+  aerospace
 )
+
+for tap in "${BREW_TAPS[@]+"${BREW_TAPS[@]}"}"; do
+  brew tap "$tap" &>/dev/null
+  log_ok "tapped: $tap"
+done
 
 for pkg in "${BREW_PACKAGES[@]+"${BREW_PACKAGES[@]}"}"; do
   if brew list --formula "$pkg" &>/dev/null; then
@@ -87,3 +99,4 @@ done
 make_link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
 make_link "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 make_link "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
+make_link "$DOTFILES_DIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
