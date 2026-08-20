@@ -36,6 +36,52 @@ make_link() {
   log_ok "$target → $src"
 }
 
+# ── Homebrew ──────────────────────────────────────────────────────────────────
+
+if ! command -v brew &>/dev/null; then
+  log_warn "Homebrew not found, installing..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+else
+  log_ok "Homebrew already installed"
+fi
+
+BREW_PACKAGES=(
+  neovim
+  tmux
+  ripgrep
+  node
+  go
+)
+
+BREW_CASKS=(
+  ghostty
+  font-jetbrains-mono-nerd-font
+)
+
+for pkg in "${BREW_PACKAGES[@]+"${BREW_PACKAGES[@]}"}"; do
+  if brew list --formula "$pkg" &>/dev/null; then
+    log_ok "already installed: $pkg"
+  else
+    log_warn "installing: $pkg"
+    brew install "$pkg"
+  fi
+done
+
+for pkg in "${BREW_CASKS[@]+"${BREW_CASKS[@]}"}"; do
+  if brew list --cask "$pkg" &>/dev/null; then
+    log_ok "already installed: $pkg"
+  else
+    log_warn "installing: $pkg"
+    brew install --cask "$pkg"
+  fi
+done
+
 # ── Links ─────────────────────────────────────────────────────────────────────
 
 make_link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
