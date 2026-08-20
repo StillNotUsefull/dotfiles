@@ -94,6 +94,17 @@ for pkg in "${BREW_CASKS[@]+"${BREW_CASKS[@]}"}"; do
   fi
 done
 
+# ── Rust ──────────────────────────────────────────────────────────────────────
+
+if command -v rustc &>/dev/null; then
+  log_ok "Rust already installed"
+else
+  log_warn "Rust not found, installing via rustup..."
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  source "$HOME/.cargo/env"
+  rustup component add rust-analyzer
+fi
+
 # ── Links ─────────────────────────────────────────────────────────────────────
 
 make_link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"

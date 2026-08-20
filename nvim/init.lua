@@ -219,7 +219,6 @@ local servers = {
   -- lsp
   gopls = {},
   pyright = {},
-  rust_analyzer = {},
   ts_ls = {},
 
   -- Special Lua Config, as recommended by neovim help docs
@@ -282,6 +281,9 @@ for name, server in pairs(servers) do
   vim.lsp.config(name, server)
   vim.lsp.enable(name)
 end
+
+-- rust_analyzer is installed via rustup, not mason (see ~/.cargo/bin)
+vim.lsp.enable 'rust_analyzer'
 
 -- ═══════════════════════════════════════════════════════════════
 -- Formatting
