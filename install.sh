@@ -11,6 +11,14 @@ GREEN='\033[0;32m'; YELLOW='\033[1;33m'; RESET='\033[0m'
 log_ok()   { echo -e "${GREEN}✔${RESET} $*"; }
 log_warn() { echo -e "${YELLOW}⚠${RESET}  $*"; }
 
+# ── Wallpaper ─────────────────────────────────────────────────────────────────
+
+WALLPAPER="$DOTFILES_DIR/wallpapers/evening-sky.png"
+
+osascript -e 'tell application "Finder"' \
+  -e "set desktop picture to POSIX file \"$WALLPAPER\"" \
+  -e 'end tell'
+
 # ── Symlink helper ────────────────────────────────────────────────────────────
 # Usage: make_link <source> <target>
 # Backs up any existing file/link before creating the symlink.
@@ -60,10 +68,12 @@ BREW_PACKAGES=(
   ripgrep
   node
   go
+  tree-sitter-cli
 )
 
 BREW_CASKS=(
   ghostty
+  obsidian
   font-jetbrains-mono-nerd-font
 )
 
