@@ -71,6 +71,9 @@ BREW_PACKAGES=(
   node
   go
   tree-sitter-cli
+  colima
+  docker
+  stats
 )
 
 BREW_CASKS=(
@@ -78,6 +81,11 @@ BREW_CASKS=(
   obsidian
   font-jetbrains-mono-nerd-font
   aerospace
+  localsend
+)
+
+BREW_SERVICES=(
+  colima
 )
 
 for tap in "${BREW_TAPS[@]+"${BREW_TAPS[@]}"}"; do
@@ -102,6 +110,10 @@ for pkg in "${BREW_CASKS[@]+"${BREW_CASKS[@]}"}"; do
     log_warn "installing: $pkg"
     brew install --cask "$pkg"
   fi
+done
+
+for service in "${BREW_SERVICES[@]+"${BREW_SERVICES[@]}"}"; do
+  brew services start "$service"
 done
 
 # ── Rust ──────────────────────────────────────────────────────────────────────
