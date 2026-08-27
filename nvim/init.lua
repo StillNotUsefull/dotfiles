@@ -550,3 +550,13 @@ require("nvim-autopairs").setup({})
 
 vim.pack.add({ "https://github.com/windwp/nvim-ts-autotag" })
 require("nvim-ts-autotag").setup({})
+
+-- ═══════════════════════════════════════════════════════════════
+-- File Explorer
+-- ═══════════════════════════════════════════════════════════════
+
+vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
+require("oil").setup()
+
+-- open file explorer
+vim.keymap.set("n", "<leader>pg", "<cmd>Oil<CR>")
