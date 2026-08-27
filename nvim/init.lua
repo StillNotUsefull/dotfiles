@@ -437,6 +437,15 @@ require("telescope").setup({
 	extensions = {
 		["ui-select"] = { require("telescope.themes").get_dropdown() },
 	},
+	defaults = {
+		file_ignore_patterns = { "%.git/" },
+	},
+	pickers = {
+		find_files = {
+			hidden = true,
+			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+		},
+	},
 })
 
 pcall(require("telescope").load_extension, "fzf")
@@ -556,7 +565,14 @@ require("nvim-ts-autotag").setup({})
 -- ═══════════════════════════════════════════════════════════════
 
 vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
-require("oil").setup()
+require("oil").setup({
+	view_options = {
+		show_hidden = true,
+		is_always_hidden = function(name, bufnr)
+			return name == ".git"
+		end,
+	},
+})
 
 -- open file explorer
 vim.keymap.set("n", "<leader>pg", "<cmd>Oil<CR>")
