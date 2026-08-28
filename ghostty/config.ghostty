@@ -2,7 +2,9 @@ theme = Catppuccin Mocha
 
 font-size = 16
 
+background-opacity = 0.94
+
 window-decoration = false
 
 window-padding-x = 4
-window-padding-y = 4
+window-padding-y = 8, 0
