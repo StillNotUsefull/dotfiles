@@ -445,6 +445,8 @@ require("telescope").setup({
 	},
 	defaults = {
 		file_ignore_patterns = { "%.git/" },
+		border = true,
+		borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 	},
 	pickers = {
 		find_files = {
@@ -616,6 +618,9 @@ require("noice").setup({
 			size = {
 				width = 60,
 				height = "auto",
+			},
+			border = {
+				style = "single",
 			},
 		},
 	},

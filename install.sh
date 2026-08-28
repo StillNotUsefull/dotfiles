@@ -131,5 +131,5 @@ fi
 
 make_link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
 make_link "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
-make_link "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
+make_link "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 make_link "$DOTFILES_DIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
