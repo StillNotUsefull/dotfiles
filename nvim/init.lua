@@ -21,7 +21,7 @@ vim.g.have_nerd_font = true
 vim.opt.guicursor = ""
 
 vim.opt.nu = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -228,6 +228,8 @@ local servers = {
 	gopls = {},
 	pyright = {},
 	ts_ls = {},
+	terraform = {},
+	terragrunt_ls = {},
 
 	-- Special Lua Config, as recommended by neovim help docs
 	lua_ls = {

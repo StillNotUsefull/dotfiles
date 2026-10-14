@@ -133,3 +133,17 @@ make_link "$DOTFILES_DIR/ghostty" "$HOME/.config/ghostty"
 make_link "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 make_link "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 make_link "$DOTFILES_DIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
+
+# ── Zsh Configuration ─────────────────────────────────────────────────────────
+
+ZSH_CUSTOM_CONFIG="$DOTFILES_DIR/zsh/.zshrc"
+SOURCE_CMD="[ -f \"$ZSH_CUSTOM_CONFIG\" ] && source \"$ZSH_CUSTOM_CONFIG\""
+
+touch "$HOME/.zshrc"
+
+if ! grep -Fq "$ZSH_CUSTOM_CONFIG" "$HOME/.zshrc"; then
+  echo "\n# Load dotfiles zsh configuration\n$SOURCE_CMD" >> "$HOME/.zshrc"
+  log_ok "added dotfiles zshrc source line to $HOME/.zshrc"
+else
+  log_ok "dotfiles zshrc already sourced in $HOME/.zshrc"
+fi
